@@ -5,7 +5,11 @@ struct ImVert   // same layout as ImDrawVert
 {
     float2 vertex   : POSITION;
     float2 uv       : TEXCOORD0;
-    uint   color    : TEXCOORD1; // gets reordered when using COLOR semantics
+#ifdef SHADER_API_METAL
+    half4  color    : TEXCOORD1; // gets reordered when using COLOR semantics
+#else
+    uint color : TEXCOORD1;
+#endif
 };
 
 struct Varyings
